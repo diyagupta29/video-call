@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+{% load static %}
+<head>
+   <meta charset="utf-8" />
+   <title>Chat App</title>
+   <link rel="stylesheet" type="text/css" href="{% static 'css/final_video_2.css' %}" />
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+   <script>
+   	function togglenav(){
+           document.getElementById("chat-container").classList.toggle('active');
+           document.getElementById("main__message_container").classList.toggle('active');
+           document.querySelector('#chat_message').focus();
+   	}
+   </script>
+   <script>
+    const ROOM_ID = '{{room_id}}';
+    const user_id = '{{user_id}}';
+    const user = '{{user}}';
+    const team_id = '{{team_id}}';
+    const user_name = '{{user.username}}';
+    </script>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+          <h3>Microsoft Teams Video Chat</h2>
+        </div>
+      </div>  
+	<div id="main-container">
+		<div id = "video-container">
+			<div id = "main-videos">
+				<div id="video-grid">
+                </div>
+			</div>
+			<div class="main__controls">
+                <div class="main__controls_block_left">
+                    <div class="main__controls_button" id="muteButton" onclick="muteUnmute()">
+                        <i class="fas fa-microphone"></i>
+                        <!-- <span>Mute</span> -->
+                    </div>
+                    <div class="main__controls_button" id="playPauseVideo" onclick="playPause()">
+                        <i class="fas fa-video"></i>
+                        <!-- <span>Pause Video</span> -->
+                    </div>
+                </div>
+                <div class="main__controls_block_right">
+                    <div class="main__controls_button" id="chat_btn" onclick="togglenav()">
+                        <i class="fas fa-comment"></i>
+                        <!-- <span>Chat</span> -->
+                    </div>
+                    <div class="main__controls_button" onclick="showInvitePopup()">
+                        <a href="{% url 'video_call:invite_people' base_url %}"><i class="fas fa-user-plus"></i></a>
+                        <!-- <span>Invite People</span> -->
+                    </div>
+                    <div class="main__controls_button" id="chat_btn" onclick="leave_meet()" title = "leave meet">
+                        <i class="fas fa-comment"></i>
+                        <!-- <span>Chat</span> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+		<div id = "chat-container">
+			<div class="main__header">
+                <h6><span class="live"></span>LIVE CHAT</h6>
+            </div>
+            <div class="main__chat__window" id="main__chat__window">
+                <ul class="messages" id="all_messages"></ul>
+            </div>
+            <div id="main__message_container">
+                <input type="text" id="chat_message" placeholder="Type message"/>
+                <button class="sendMsg" id="sendMsg"><i class="fas fa-paper-plane fa-2x material-icons"></i></button>
+            </div>
+        </div>	
+        
+
+    </div>
+    <script type="text/javascript" src="{% static 'js/final_video_3.js' %}"></script>
+</body>
